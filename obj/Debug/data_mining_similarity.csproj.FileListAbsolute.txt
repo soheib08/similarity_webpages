@@ -1,0 +1,6 @@
+c:\users\soheib\documents\visual studio 2015\Projects\data_mining_similarity\data_mining_similarity\bin\Debug\data_mining_similarity.exe.config
+c:\users\soheib\documents\visual studio 2015\Projects\data_mining_similarity\data_mining_similarity\bin\Debug\data_mining_similarity.exe
+c:\users\soheib\documents\visual studio 2015\Projects\data_mining_similarity\data_mining_similarity\bin\Debug\data_mining_similarity.pdb
+c:\users\soheib\documents\visual studio 2015\Projects\data_mining_similarity\data_mining_similarity\obj\Debug\data_mining_similarity.csprojResolveAssemblyReference.cache
+c:\users\soheib\documents\visual studio 2015\Projects\data_mining_similarity\data_mining_similarity\obj\Debug\data_mining_similarity.exe
+c:\users\soheib\documents\visual studio 2015\Projects\data_mining_similarity\data_mining_similarity\obj\Debug\data_mining_similarity.pdb
