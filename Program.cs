@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Text.RegularExpressions;
 
+
 namespace data_mining_similarity
 {
     class Program
@@ -32,14 +33,14 @@ namespace data_mining_similarity
         ///seprate words form each others
         static string[] get_words(string[] input)
         {
-            //remove unuseful words and characters
+
             string[] output = new string[input.Length];
 
             int j = 0;
             for (int i = 0; i < input.Length; i++)
             {
                 input[i] = input[i].ToLower();
-                if (input[i] != "be" && input[i] != "" && input[i] != " " && input[i] != "</br>" && input[i] != "</a>" && input[i] != "</p>" && input[i] != "<a>" && input[i] != "<p>" && input[i] != "." && input[i] != "a" && input[i] != "the" && input[i] != "as" && input[i] != "than" && input[i] != "this" && input[i] != "or" && input[i] != "and" && input[i] != "am" && input[i] != "I" && input[i] != "to" && input[i] != "not" && input[i] != "you" && input[i] != "we" && input[i] != "your" && input[i] != "our" && input[i] != "they" && input[i] != "that" && input[i] != "what" && input[i] != "why" && input[i] != "while" && input[i] != "who" && input[i] != "is" && input[i] != "were" && input[i] != "such" && input[i] != "much" && input[i] != "but" && input[i] != "have" && input[i] != "has" && input[i] != "only" && input[i] != "since" && input[i] != "off" && input[i] != "by" && input[i] != "an" && input[i] != "are" && input[i] != "had" && input[i] != "having" && input[i] != "who" && input[i] != "!" && input[i] != "?" && input[i] != "of" && input[i] != "want" && input[i] != "do" && input[i] != "does" && input[i] != "you" && input[i] != "at" && input[i] != "can" && input[i] != "shoud" && input[i] != "for" && input[i] != "it" && input[i] != "will" && input[i] != "this" && input[i] != "in" && input[i] != "non" && input[i] != "how")
+                if (input[i].Length < 11 && input[i] != "!" && input[i] != "?" && input[i] != ";" && input[i] != ":" && input[i] != "/" && input[i] != "," && input[i] != "<!--" && input[i] != "-->" && input[i] != "//" && input[i] != "-" && input[i] != "before" && input[i] != "after" && input[i] != "over" && input[i] != "her" && input[i] != "him" && input[i] != "she" && input[i] != "if" && input[i] != "on" && input[i] != "often" && input[i] != "his" && input[i] != "he" && input[i] != "be" && input[i] != "" && input[i] != " " && input[i] != "</br>" && input[i] != "</a>" && input[i] != "</p>" && input[i] != "<a>" && input[i] != "<p>" && input[i] != "." && input[i] != "a" && input[i] != "the" && input[i] != "as" && input[i] != "than" && input[i] != "this" && input[i] != "or" && input[i] != "and" && input[i] != "am" && input[i] != "I" && input[i] != "to" && input[i] != "not" && input[i] != "you" && input[i] != "we" && input[i] != "your" && input[i] != "our" && input[i] != "they" && input[i] != "that" && input[i] != "what" && input[i] != "why" && input[i] != "while" && input[i] != "who" && input[i] != "is" && input[i] != "were" && input[i] != "such" && input[i] != "much" && input[i] != "but" && input[i] != "have" && input[i] != "has" && input[i] != "only" && input[i] != "since" && input[i] != "off" && input[i] != "by" && input[i] != "an" && input[i] != "are" && input[i] != "had" && input[i] != "having" && input[i] != "who" && input[i] != "!" && input[i] != "?" && input[i] != "of" && input[i] != "want" && input[i] != "do" && input[i] != "does" && input[i] != "you" && input[i] != "at" && input[i] != "can" && input[i] != "shoud" && input[i] != "for" && input[i] != "it" && input[i] != "will" && input[i] != "this" && input[i] != "in" && input[i] != "non" && input[i] != "how")
                 {
                     output[j] = input[i].ToString();
                     j++;
@@ -141,19 +142,31 @@ namespace data_mining_similarity
             word[] page1 = new word[length1 + 1];
             word[] page2 = new word[length2 + 1];
 
+
             page1 = create_words(content1);
             page2 = create_words(content2);
+
+
 
             int page1_length = get_word_Array_length(page1);
             int page2_length = get_word_Array_length(page2);
             word[] final1 = new word[page1_length];
             word[] final2 = new word[page2_length];
 
+            ///this for compare becasue information of top arrays  is change and unsueful
+            word[] final11 = new word[page1_length];
+            word[] final22 = new word[page2_length];
+            ///////////
+
             for (int i = 0; i < page1_length; i++)
             {
                 final1[i] = new word();
                 final1[i].name = page1[i].name;
                 final1[i].count = page1[i].count;
+
+                final11[i] = new word();
+                final11[i].name = page1[i].name;
+                final11[i].count = page1[i].count;
 
             }
             for (int i = 0; i < page2_length; i++)
@@ -162,13 +175,137 @@ namespace data_mining_similarity
                 final2[i].name = page2[i].name;
                 final2[i].count = page2[i].count;
 
+                final22[i] = new word();
+                final22[i].name = page2[i].name;
+                final22[i].count = page2[i].count;
+
             }
 
 
 
+            // insert content and words to array 
+            string[] sum_array = new string[final1.Length + final2.Length];
+
+            int k = 0;
+            for (int i = 0; i < final1.Length; i++)
+            {
+                for (int j = 0; j < final2.Length; j++)
+                {
+                    if (final1[i].name == final2[j].name && final1[i].name != "" && final2[j].name != "")
+                    {
+                        sum_array[k] = final1[i].name;
+                        k++;
+                        final1[i].name = "";
+                        final2[j].name = "";
+
+                    }
+                }
+            }
+            for (int i = 0; i < final1.Length; i++)
+            {
+                if (final1[i].name != "")
+                {
+                    sum_array[k] = final1[i].name;
+                    k++;
+                }
+            }
+            for (int i = 0; i < final2.Length; i++)
+            {
+                if (final2[i].name != "")
+                {
+                    sum_array[k] = final2[i].name;
+                    k++;
+                }
+            }
+
+
+            ////insert count of each word to array
+            string[,] similarity_array = new string[k, 3];
+            for (int i = 0; i < k; i++)
+            {
+                similarity_array[i, 0] = sum_array[i];
+            }
+            bool flag1 = true;
+            for (int i = 0; i < k; i++)
+            {
+                for (int j = 0; j < final11.Length; j++)
+                {
+                    if (similarity_array[i, 0] == final11[j].name)
+                    {
+                        similarity_array[i, 1] = final11[j].count.ToString();
+                        flag1 = true;
+                        break;
+
+
+
+                    }
+                    else
+                    {
+                        flag1 = false;
+                    }
+                }
+                if (flag1 == false)
+                {
+                    similarity_array[i, 1] = "0";
+                    flag1 = true;
+                }
+            }
+            bool flag2 = true;
+            for (int i = 0; i < k; i++)
+            {
+                for (int j = 0; j < final22.Length; j++)
+                {
+                    if (similarity_array[i, 0] == final22[j].name)
+                    {
+                        similarity_array[i, 2] = final22[j].count.ToString();
+                        flag2 = true;
+                        break;
+
+                    }
+                    else
+                    {
+                        flag2 = false;
+                    }
+                }
+                if (flag2 == false)
+                {
+                    similarity_array[i, 2] = "0";
+                    flag2 = true;
+                }
+            }
+
+
+            ///compute similarity
+
+            double d1d2 = 0;
+            for (int i = 0; i < k; i++)
+            {
+                d1d2 = d1d2 + (int.Parse(similarity_array[i, 1]) * int.Parse(similarity_array[i, 2]));
+
+            }
+
+            double d1length = 0;
+            for (int i = 0; i < k; i++)
+            {
+                d1length = d1length + (int.Parse(similarity_array[i, 1]) * int.Parse(similarity_array[i, 1]));
+
+            }
+            d1length = System.Math.Sqrt(d1length);
+
+            double d2length = 0;
+            for (int i = 0; i < k; i++)
+            {
+                d2length = d2length + (int.Parse(similarity_array[i, 2]) * int.Parse(similarity_array[i, 2]));
+
+            }
+            d2length = System.Math.Sqrt(d2length);
+
+            double similarity = (d1d2) / (d1length * d2length);
+
+
+
+            Console.WriteLine("similarity between this webpages is : " + similarity.ToString());
             Console.ReadKey();
-
-
         }
     }
 }
